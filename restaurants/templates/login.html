@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+</head>
+<body>
+    
+<main>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                {% if messages %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                        style="margin-top: 50px;">
+                        <strong>{{ messages }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endif %}
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Войти</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'login' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <label class="small mb-1" for="inputUsername">Имя пользователя</label>
+                                    {{ form.username }}
+                                    <label class="small mb-1" for="inputPassword">Пароль</label>
+                                    {{ form.password }}
+                                </div>
+                            </div>
+                            <div class="form-group mt-4 mb-0">
+                                <input class="btn btn-primary btn-block" type="submit" value="Создать аккаунт">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center">
+                        <div class="small"><a href="{% url 'registration' %}">Нет аккаунта? Зарегистрироваться</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

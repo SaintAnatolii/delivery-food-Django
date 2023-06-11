@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+	<main class="main">
+		<div class="container">
+			<section class="menu">
+				<div class="section-heading">
+					<h2 class="section-title restaurant-title">{{ restaurant.name }}</h2>
+					<div class="card-info">
+						<div class="rating">{{ restaurant.stars }}</div>
+						<div class="price">От {{ restaurant.price }} ₽</div>
+						<div class="category">{{ restaurant.kitchen }}</div>
+					</div>
+				</div>
+				<div class="cards cards-menu">
+					{% for item in products %}
+						<div class="card">
+							<img src="{{ item.image.url }}" alt="image" class="card-image"/>
+							<div class="card-text">
+								<div class="card-heading">
+									<h3 class="card-title card-title-reg">{{ item.name }}</h3>
+								</div>
+								<div class="card-info">
+									<div class="ingredients">{{ item.description }}</div>
+								</div>
+								<div class="card-buttons">
+									<form action="{% url 'add_food' item.id %}" method="post">
+										{% csrf_token %}
+										<button type="submit" class="button button-primary button-add-cart">
+											<span class="button-card-text">В корзину</span>
+											<span class="button-cart-svg"></span>
+										</button>
+									</form>
+									<strong class="card-price-bold">{{ item.price }} ₽</strong>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</section>
+		</div>
+	</main>
+
+{% endblock %}

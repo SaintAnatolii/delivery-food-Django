@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+{% load static %}
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Delivery Food — доставка еды на дом</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=cyrillic" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <!-- <link rel="stylesheet" href="{% static 'https://unpkg.com/swiper/css/swiper.min.css' %}"> -->
+
+	<script src="{% static 'js/main.js' %}" defer></script>
+</head>
+
+<body>
+	<div class="container">
+		<header class="header">
+			<a class="logo" href="{% url 'home' %}">
+				<img src="{% static 'img/icon/logo.svg' %}" alt="Logo"/>
+			</a>
+			<label class="address">
+				<input type="text" class="input input-address" placeholder="Адрес доставки"/>
+			</label>
+			<div class="buttons">
+				<span class="user-name"></span>
+				{% if user.is_authenticated %}
+					<a href="{% url 'login' %}">
+						<button class="button button-primary button-out" style="display: flex;">
+							<span class="button-text">Выйти</span>
+							<span class="button-out-svg"></span>
+						</button>
+					</a>
+					<a href="{% url 'cart' %}">
+						<button class="button button-cart" id="cart-button">
+							<span class="button-cart-svg"></span>
+							<span class="button-text">Корзина</span>
+						</button>
+					</a>
+				{% else %}
+				<a href="{% url 'login' %}">
+					<button class="button button-primary button-auth">
+						<span class="button-auth-svg"></span>
+						<span class="button-text">Войти</span>
+					</button>
+				</a>
+				{% endif %}
+			</div>
+		</header>
+	</div>
+	<!-- /.container  -->
+    {% block content %}{% endblock %}
+
+    <footer class="footer">
+		<div class="container">
+			<div class="footer-block">
+				<img src="{% static 'img/icon/logo.svg' %}" alt="logo" class="logo footer-logo"/>
+				<nav class="footer-nav">
+					<a href="#" class="footer-link">Ресторанам </a>
+					<a href="#" class="footer-link">Курьерам</a>
+					<a href="#" class="footer-link">Пресс-центр</a>
+					<a href="#" class="footer-link">Контакты</a>
+				</nav>
+				<div class="social-links">
+					<a href="#" class="social-link"><img src="{% static 'img/social/instagram.svg' %}" alt="instagram"/></a>
+					<a href="#" class="social-link"><img src="{% static 'img/social/fb.svg' %}" alt="facebook"/></a>
+					<a href="#" class="social-link"><img src="{% static 'img/social/vk.svg' %}" alt="vk"/></a>
+				</div>
+				<!-- /.social-links -->
+			</div>
+			<!-- /.footer-block -->
+		</div>
+	</footer>
+
+</body>
+</html>

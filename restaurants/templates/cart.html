@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content%}
+
+	<main class="main">
+		<div class="container">
+			<div class="modal-cart">
+				<div class="modal-dialog">
+					{% if cart %}
+						<div class="modal-header">
+							<h3 class="modal-title">Корзина</h3>
+						</div>
+						<!-- /.modal-header -->
+						<div class="modal-body">
+							<!-- ! цикл для корзины -->
+							{% for item in cart %}
+								<div class="food-row">
+									<span class="food-name">{{ item.product.name }}</span>
+									<strong class="food-price">{{ item.sum }} ₽</strong>
+									<div class="food-counter">
+										<button class="counter-button">-</button>
+										<span class="counter">1</span>
+										<button class="counter-button">+</button>
+										<a href="{% url 'del_food' item.product_id %}">
+											<button class="counter-button">&#10006;</button>
+										</a>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+			
+						<!-- /.modal-body -->
+						<div class="modal-footer">
+							<span class="modal-pricetag">{{ total_sum }} ₽</span>
+							<div class="footer-buttons">
+								<button class="button button-primary">Оформить заказ</button>
+								<button class="button clear-cart">Отмена</button>
+							</div>
+						</div>
+					{% else %}
+						<div class="modal-header">
+							<h3 class="modal-title">Корзина пуста</h3>
+						</div>
+					{% endif %}
+					<!-- /.modal-footer -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+
+{% endblock %}
